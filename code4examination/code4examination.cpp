@@ -3,17 +3,58 @@
 
 #include "pch.h"
 #include <iostream>
+#include<stdio.h>
+#include<stdlib.h>
+
+using namespace std;
 
 int fn(int n, int a, int b, int c, int f0);
+void mellonW(int *mellon_t, int *mellon_w, int *mellon_m, int *maxW, int n, int m);
+class Node
+{
+public:
+	int mellon_t;
+	int mellon_w;
+
+};
+
+
+
 int main()
 {
+/*
 	int n, a, b, c, f0;
 	int fout;
 	scanf_s("%d %d %d %d %d", &n, &a, &b, &c, &f0);
 	fn(n, a, b, c, f0);
 	printf("%d\n", fn(n, a, b, c, f0));
-    std::cout << "Hello World!\n"; 
+*/
+/*	
+	*/
+	int n, m;
+	cin >> n >> m;
+	cout << "输入" << n << "个西瓜参数(t w):" << endl;
+	int mellon_t[1000], mellon_w[1000], mellon_m[100];
+	int maxW[100] = { 0 };
+	for (int i = 0; i < n; i++) {
+		scanf_s("%d%%d/n", &mellon_t[i], &mellon_w[i]);
+		//cin >> mellon_t[i] >> mellon_w [i];
+		//char ch = '\n';
+		//cin >> ch;
+	}
+	cout << "输入" << m << "时间参数:" << endl;
+	for (int i = 0; i < m; i++) {
+		cin >> mellon_m[i];
+	}
+	mellonW(mellon_t, mellon_w, mellon_m, maxW, n, m);
+	cout << "各时间段下最重的西瓜:" << endl;
+	for (int i = 0; i < m; i++) {
+		cout << maxW[i] << endl;
+	}
+	//Node mellon[n];
 }
+
+
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
 // 调试程序: F5 或调试 >“开始调试”菜单
