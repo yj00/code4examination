@@ -4,8 +4,14 @@
 #include "pch.h"
 #include <iostream>
 
+int fn(int n, int a, int b, int c, int f0);
 int main()
 {
+	int n, a, b, c, f0;
+	int fout;
+	scanf_s("%d %d %d %d %d", &n, &a, &b, &c, &f0);
+	fn(n, a, b, c, f0);
+	printf("%d\n", fn(n, a, b, c, f0));
     std::cout << "Hello World!\n"; 
 }
 
