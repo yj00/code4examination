@@ -10,14 +10,6 @@ using namespace std;
 
 int fn(int n, int a, int b, int c, int f0);
 void mellonW(int *mellon_t, int *mellon_w, int *mellon_m, int *maxW, int n, int m);
-class Node
-{
-public:
-	int mellon_t;
-	int mellon_w;
-
-};
-
 
 
 int main()
