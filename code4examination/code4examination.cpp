@@ -10,6 +10,11 @@ using namespace std;
 
 int fn(int n, int a, int b, int c, int f0);
 void mellonW(int *mellon_t, int *mellon_w, int *mellon_m, int *maxW, int n, int m);
+void selectSort(int *a, int n);
+void bubbleSort(int *a, int n);
+void insertSort(int *a, int n);
+void shellSort(int *a, int n);
+void __MergeSort(int *a, int left, int right, int *tmp);
 
 
 int main()
@@ -22,7 +27,7 @@ int main()
 	printf("%d\n", fn(n, a, b, c, f0));
 */
 /*	
-	*/
+	
 	int n, m;
 	cin >> n >> m;
 	cout << "输入" << n << "个西瓜参数(t w):" << endl;
@@ -43,7 +48,21 @@ int main()
 	for (int i = 0; i < m; i++) {
 		cout << maxW[i] << endl;
 	}
-	//Node mellon[n];
+*/	//Node mellon[n];
+	int a[10] = {1,2,6,3,4,5,9,8,7,0};
+	int n = 10;
+	//selectSort(a, n);
+	//bubbleSort(a, n);
+	//insertSort(a, n);
+	//shellSort(a, n);
+
+	int *tmp = (int*)malloc(10 * sizeof(int));
+	__MergeSort(a, 0, n-1, tmp);
+	free(tmp);
+	for (int i = 0; i < n; i++) {
+		std::cout << a[i];
+	}
+	std::cout << endl;
 }
 
 
