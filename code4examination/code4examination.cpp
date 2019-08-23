@@ -15,7 +15,8 @@ void bubbleSort(int *a, int n);
 void insertSort(int *a, int n);
 void shellSort(int *a, int n);
 void __MergeSort(int *a, int left, int right, int *tmp);
-
+void quickSort(int *a, int left, int right);
+void quickSortNOR(int *a, int left, int right);
 
 int main()
 {
@@ -56,9 +57,12 @@ int main()
 	//insertSort(a, n);
 	//shellSort(a, n);
 
-	int *tmp = (int*)malloc(10 * sizeof(int));
-	__MergeSort(a, 0, n-1, tmp);
-	free(tmp);
+	//int *tmp = (int*)malloc(10 * sizeof(int));
+	//__MergeSort(a, 0, n-1, tmp);
+	//free(tmp);
+
+	//quickSort(a, 0, n - 1);
+	quickSortNOR(a, 0, n - 1);
 	for (int i = 0; i < n; i++) {
 		std::cout << a[i];
 	}
