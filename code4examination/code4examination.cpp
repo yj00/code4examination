@@ -17,6 +17,9 @@ void shellSort(int *a, int n);
 void __MergeSort(int *a, int left, int right, int *tmp);
 void quickSort(int *a, int left, int right);
 void quickSortNOR(int *a, int left, int right);
+void heapSort(int *a, int n);
+void countSort(int *a, int n);
+void bucketSort(int *a, int n, int bucketCount);
 
 int main()
 {
@@ -50,8 +53,8 @@ int main()
 		cout << maxW[i] << endl;
 	}
 */	//Node mellon[n];
-	int a[10] = {1,2,6,3,4,5,9,8,7,0};
-	int n = 10;
+	int a[20] = {1,2,6,3,4,5,9,8,7,0,19,50,13,24,45,20,12,34,60,11};
+	int n = 20;
 	//selectSort(a, n);
 	//bubbleSort(a, n);
 	//insertSort(a, n);
@@ -62,9 +65,13 @@ int main()
 	//free(tmp);
 
 	//quickSort(a, 0, n - 1);
-	quickSortNOR(a, 0, n - 1);
+	//quickSortNOR(a, 0, n - 1);
+	//heapSort(a, n);
+	//countSort(a, n);
+	bucketSort(a, n, n / 2);
+
 	for (int i = 0; i < n; i++) {
-		std::cout << a[i];
+		std::cout << a[i]<<' ';
 	}
 	std::cout << endl;
 }

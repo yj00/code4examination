@@ -4,6 +4,7 @@
 #include<stack>
 #include<cstdio>
 #include<cstring>
+#include<vector>
 
 using namespace std;
 
@@ -246,17 +247,148 @@ void quickSortNOR(int *a, int left, int right) {
 }
 
 //7.Heap Sort:时间复杂度O(nlog(n))堆排序一般采用大根堆，较快排稳定，无需额外的空间存储代价，In-place,不稳定
-
-
+void heapSort(int *a, int n) {
+	
+	//数组实现堆
+	int i = n / 2 - 1;
+	int first = i, last = n - 1;
+	while (i >= 0) {
+		int curIndex = first * 2 + 1;
+		while (curIndex <= last) {
+			if (curIndex <= last && a[curIndex] < a[curIndex + 1]) {
+				curIndex++;
+			}
+			if (a[first] < a[curIndex]) {
+				swap(a[first], a[curIndex]);
+				first = curIndex;
+				curIndex = first * 2 + 1;
+			}
+			else
+				break;
+		}
+		i--;
+	}
+	first = 0;
+	while (first <= last) {
+		swap(a[first], a[last]);
+		last--;
+		int curIndex = first * 2 + 1;
+		while (curIndex <= last) {
+			if (curIndex <= last && a[curIndex] < a[curIndex + 1]) {
+				curIndex++;
+			}
+			if (a[first] < a[curIndex]) {
+				swap(a[first], a[curIndex]);
+				first = curIndex;
+				curIndex = first * 2 + 1;
+			}
+			else
+				break;
+		}
+	}
+}
+/*
+class HeapSort {
+public:
+	void AdjustDown(int *A, int root, int n) {
+		int parent = root;
+		int child = parent * 2 + 1;
+		while (child < n) {
+			if ((child + 1) < n&&A[child + 1] > A[child]) {
+				++child;
+			}
+			if (A[child] > A[parent]) {
+				swap(A[parent], A[child]);
+				parent = child;
+				child = parent * 2 + 1;
+			}
+			else
+				break;
+		}
+	}
+	int* heapSort(int*A, int n) {
+		for (int i = (n - 2) / 2; i >= 0; i--) {
+			AdjustDown(A, i, n);
+		}
+		int end = n - 1;
+		while (end > 0) {
+			swap(A[0], A[end]);
+			AdjustDown(A, 0, end);
+			end--;
+		}
+		return A;
+	}
+};
+*/
 //8.计数排序:时间复杂度O(n+k),空间复杂度O(k),Out-place,稳定
-
+void countSort(int *a, int n) {
+	int min = a[0], max = a[0];
+	for (int i = 1; i < n; i++) {
+		if (min > a[i])
+			min = a[i];
+		if (max < a[i])
+			max = a[i];
+	}
+	vector<int> counts(max - min + 1);
+	for (int i = 0; i < n; i++) {
+		counts[a[i] - min]++;
+	}
+	int index = 0;
+	for (int j = 0; j < counts.size(); j++) {
+		int n = counts[j];
+		while (n--) {
+			a[index] = j + min;
+			index++;
+		}
+	}
+}
 
 
 //9.桶排序:时间复杂度O(n+k),空间复杂度O(n+k),Out-place,稳定
+void bucketSort(int *a, int n, int bucketCount) {
+	int min = a[0], max = a[0];
+	for (int i = 1; i < n; i++) {
+		if (min > a[i])
+			min = a[i];
+		if (max < a[i])
+			max = a[i];
+	}
+	vector<vector<int>> buckets(bucketCount);
+	int bucketSize = ceil((double)(max - min + 1) / bucketCount);
+	for (int i = 0; i < n; i++) {
+		int bucketIndex = (a[i] - min) / bucketSize;
+		buckets[bucketIndex].push_back(a[i]);
+	}
+	int index = 0;
+	for (vector<int> bucket : buckets) {
+		if (!bucket.empty()) {
+			for (int i = 1; i < bucket.size(); i++) {
+			
+	for (int j = i - 1; j >= 0 && bucket[j + 1] < bucket[j]; j--) {
+					swap(bucket[j + 1], bucket[j]);
+				}
+			}
+			for (int value : bucket) {
+				a[index] = value;
+				index++;
+			}
+		}
+	}
 
+}
 
 //10.Radix Sort:时间复杂度O(n+k),空间复杂度O(n+k)，Out-place, 稳定
+void radixSort(int *a, int n,int dec,int order) {
+	int i, j;
+	int index;
+	int num[10];
 
+
+	int curdigit = 10;
+	bool isOverHighest = false;
+	while (!isOverHighest) {
+	}
+}
 
 
 
