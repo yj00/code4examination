@@ -3,8 +3,11 @@
 
 #include "pch.h"
 #include <iostream>
+#include<string>
+#include<cstring>
 #include<stdio.h>
 #include<stdlib.h>
+#include<vector>
 
 using namespace std;
 
@@ -20,6 +23,7 @@ void quickSortNOR(int *a, int left, int right);
 void heapSort(int *a, int n);
 void countSort(int *a, int n);
 void bucketSort(int *a, int n, int bucketCount);
+int findPeakElement(vector<int>&nums);
 
 int main()
 {
@@ -53,8 +57,8 @@ int main()
 		cout << maxW[i] << endl;
 	}
 */	//Node mellon[n];
-	int a[20] = {1,2,6,3,4,5,9,8,7,0,19,50,13,24,45,20,12,34,60,11};
-	int n = 20;
+	//int a[20] = {1,2,6,3,4,5,9,8,7,0,19,50,13,24,45,20,12,34,60,11};
+	//int n = 20;
 	//selectSort(a, n);
 	//bubbleSort(a, n);
 	//insertSort(a, n);
@@ -68,14 +72,65 @@ int main()
 	//quickSortNOR(a, 0, n - 1);
 	//heapSort(a, n);
 	//countSort(a, n);
-	bucketSort(a, n, n / 2);
+	//bucketSort(a, n, n / 2);
 
+	//for (int i = 0; i < n; i++) {
+		//std::cout << a[i]<<' ';
+	//}
+	//std::cout << endl;
+	//<[播]放|来>[一|几]<首|个>@singer的<歌[曲]|[流行]音乐>
+	//int leny, lenq;
+	//string yymodel;
+	//string query;
+	//cin >> yymodel;
+	//cin >> query;
+	//leny = yymodel.size();
+	//lenq = query.size();
+	//printf_s("%X", yymodel[2]);
+	//cout << yymodel[2] << endl;
+	//cout << leny << lenq << endl;
+	//vector<vector<int>> arryZ;
+	//arryZ.size();
+	int n;
+	string Name[13] = { "A","B","C","D","E","F","J","H","I","J","K","L","M" };
+	cout << Name[0] << endl;
+	int numExam[13];
+	string exam[13];
+	std::cin >> n;
 	for (int i = 0; i < n; i++) {
-		std::cout << a[i]<<' ';
+		//std::cin >> exam[i];
+		scanf_s("%s", &exam[i]);
 	}
-	std::cout << endl;
+	cout<< exam->length()<<endl;
+	for (int j = 0; j < 13; j++) {
+		std::cin >> numExam[j];
+	}
+	int k = 0;
+	int a = numExam[0];
+	for (int j = 0; j < 13; j++) {	
+		for (int i = 0; i < n; i++) {
+			if (a < numExam[j] && exam[i] != Name[j]) {
+				a = numExam[j]; k = j;
+			}
+		}
+	}
+	cout << Name[k];
 }
-
+/*
+int findPeakElement(vector<int>&nums) {
+	int i = 0;
+	int index;
+	while (i < nums.size()) {
+		if (nums[i] > nums[i - 1] && nums[i] > nums[i + 1]) {
+			index = i;
+			i += 2;
+		}
+		else {
+			i++;
+		}
+	}
+	cout << index << endl;
+}*/
 
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
