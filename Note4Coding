@@ -1,0 +1,225 @@
+                NOTE for CODING
+
+A.数据结构  
+{
+	1.链表：特殊的结构体
+	{
+		struct node{
+            int num;
+            struct node *next; //指向struct node型的结构体
+        }
+        成员： int & struct node
+         _____            _____ 
+        | num |    --->  | num |
+        |_____|   |      |_____| 
+        |*next|----      |*next|
+        |_____|          |_____|
+         
+        C语言实现：
+        #include<stdio.h>
+        #include<stdlib.h>
+        //链表
+        struct node{
+            int num;
+            struct node *next;
+        }；
+        typedef struct node list_single;
+        //单向链表节点的创建
+        list_single *create_list_node(int data){
+            list_single *node=NULL;
+            node=(list_single*)malloc(sizeof(list_single));
+            if(node==NULL){
+                printf("malloc fail!\n");
+            }
+            meset(node,0,sizeof(list_single));
+            node->num=data;
+            node->next=NULL;
+        }
+        //单向链表的尾插
+        //(当前链表)header ---> data|next --->NULL(尾节点)    <---data|next--->NULL(新节点)
+        //                                       |_____________|
+        //                                            (链接)       
+        void tail_insert(list_single* node_tail,list_single* node_new){
+            list_single* p=node_tail;
+            while(NULL!=p->next){
+                p=p->next;
+            }
+            p->next=node_tail;
+        }
+        
+        //单向链表的头插
+        //(当前链表)header--->data|next(头节点)--|-->(后节点)data|next--->data|next
+        //                         |                          |
+        //                         |          (新节点)        |
+        //                          -------->data|next<-------
+        void top_insert(list_single* node_top,list_single* node_new){
+            list_single* p=node_top;
+            node_new->next=p->next;
+            p->next=node_new;
+        }
+        
+        //链表的遍历
+        void travesal_node(list_single* current_node){
+            list_single* p=current_node;
+            p=p->next;
+            while(NULL!=p->next){
+                printf("nodeId:%d\n",p->num);
+                p=p->next;
+            }
+            printf("nodeId:%d\n",p->num);
+        }
+        
+        //删除链表中的节点
+        void delete_note(list_single* current_node, int data){
+            list_single* p=current_node;
+            list_single* prev=NULL;
+            while(NULL!=p->next){
+                prev=p;
+                p=p->next;
+                if(p->num==data){
+                    if(p->nex==NULL){
+                        prev->next=NULL;
+                        free(p);
+                    }
+                    else{
+                        prev->next=p->next;
+                        free(p);
+                    }
+                }
+            }
+            printf("未找到要删除的节点\n");
+        } 
+        
+        int main(){
+            struct node *head; //申明表头head(链表开始的位置)
+            head=null; //建空表
+            struct node *p1, *p2;
+            int i=1;
+            //利用malloc()申请分配节点(即为一个地址)
+            p1=p2=(struct node *)malloc(sizeof(struct node));
+            printf("请输入值，值<=0结束，值的存放地址为：p1_addr=%d\n",p1);
+            scanf("%d",&p1->num);
+            p1->no=i;
+            p1->next=NULL;
+            while(p1->num>0){ //输入的节点数值大于0
+                if(head==NULL)
+                    head=p1;   //空表接入表头
+                else
+                    p2->next=p1;  //非空表，接到表尾
+                p2=p1;
+                p1=(struct node *)malloc(sizeof(struct node));   //下一新节点
+                i++；
+                printf("请输入值，值<=0结束，值的存放地址为：p%d_addr\n",i,p2);
+                scanf("%d",&p1->num);
+                p1->no=i;
+                //判断一下是否有后续节点要接入链表，若无则结束；
+            }       
+            free(p1);//申请到的没录入，所以释放
+            p1=NULL; //指向空；
+            p2->next=NULL;//到表尾，指向空；
+            printf("链表输入结束(END)\n");
+            getchar();
+            return 0;
+        }
+	}               
+    
+    2.队列
+                     
+    3.堆栈
+       
+    4.树
+	{
+		非线性结构
+		层级关系
+		节点,
+		根节点——树的最顶端
+		父节点/子节点
+		兄弟节点——拥有同一父节点的节点，
+		叶子节点——无子节点
+		树的高度——根节点到叶子节点的路径上分支最长的分支数
+		节点深度——某一结点到根节点上的分支数
+		简单的树形结构
+		class TreeNode{
+			int value;
+			List descendents;
+			
+			public TreeNode(int value){
+				this.value=value;
+				this.desendents=new ArrayList;
+			}
+		}
+		TreeNode root=new TreeNode('a');
+		TreeNode bNode=new TreeNode('b');
+		root.decendents.add(bNode);
+		...
+		
+		
+		
+	}
+	
+} 
+	
+B.数据类型
+{
+	float/double的范围和精度
+		value = 尾数 x 底数 ^ 指数(附加正负号)
+		float: 1 bit(符号位) + 8 bits(指数位) + 23 bits(尾数位)  (32 bits)
+		double:1 bit(符号位) + 11 bits(符号位) + 52 bits(尾数位) (64 bits)
+	指数范围：
+		float: -(2^)128~(2^)128  -3.4E38~3.4E38; double: -(2^)1024~(2^)1024 -1.797E308~1.797E308
+	尾数位数：
+		float: 2^23 = 8388608 精度：有效数字为 6~7 位,能保证6位; double: 2^52 = 4503599627370496 精度：有效数字为 15 ~ 16位, 能保证15位
+	C#/C++对浮点数的存储：float 遵从 IEEE R32.24 double 遵从 IEEE R64.53 科学计数法存储
+        1.符号位(Sign) : 0代表正，1代表为负
+        2.指数位（Exponent）:用于存储科学计数法中的指数数据，并且采用移位存储
+        3.尾数部分（Mantissa）：尾数部分
+	float:
+		1 11111111 尾数的23位不全为0: 表示不是数值 
+		1 11111111 00000000000000000000000: 表示负无穷大.比最小负数还小的数都视为负无穷大. 
+		1 11111110 11111111111111111111111: 表示最小的负数,即-2^128=-3.4*10^38 
+		1 00000001 00000000000000000000000: 表示最大的负数,即-2^(-126)=-1.18*10^(-38) 
+		0 00000000 00000000000000000000000: 表示0 
+		0 00000001 00000000000000000000000: 表示最小的正数,即2^(-126)=1.18*10^(-38) 
+		0 11111110 11111111111111111111111: 表示最大的正数,即2^(128)=3.4*10^(38) 
+		0 11111111 00000000000000000000000: 表示正无穷大,比最大正数还大的数都视为正无穷大. 
+		0 11111111 尾数的23位不全为0: 表示不是数值 
+	综上所述,float型数据的表示范围有以下五种(还有别的特殊的就不说了): 
+	负无穷大; -3.4*10^38<x<-1.175*10^(-38); 0; 1.175*10^(-38)<x<3.4*10^38; 正无穷大. 
+	当然,单精度数的输出只能保证6到7个有效数字,其余各位不准确,但在内存中的存放是准确的.
+	如 8.25 二进制: 1000.01, 二进制科学计数法: (1.03125)*8 1.0001*2e3
+		0 | 1000 0010 | 000 1000 0000 0000 0000 0000
+		0 | 3+127=130 | 0001
+}
+
+
+C++ 类的定义实现
+{
+	类的定义可以分为两部分：说明部分和实现部分
+	说明部分说明类中包含的数据成员和成员函数，实现部分是对成员函数的定义。类定义的一般格式如下：
+	//类的说明部分
+	class <类名>{
+		public: <成员函数或数据成员的说明> //公有成员
+		protected: <数据成员或成员函数的说明> //保护成员
+		private: <数据成员或成员函数的说明>  //私有成员
+	}
+	
+}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

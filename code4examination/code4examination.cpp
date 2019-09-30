@@ -8,8 +8,28 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<vector>
-
+#include<stack>
+#include<istream>
 using namespace std;
+
+
+
+bool isRight(vector<char> &vec) {
+	stack<char> stack1;
+	bool index = false;
+	if (vec.size() <= 1 || vec[0] != '(' || vec.size() % 2 != 0) {
+		return index;
+	}
+	for (int i = 0; i < vec.size(); i++) {
+		if (vec[i] == '(')
+			stack1.push(vec[i]);
+		else if (vec[i] == ')')
+			stack1.pop();
+	}
+	if (stack1.empty())
+		index = true;
+	return index;
+}
 
 int fn(int n, int a, int b, int c, int f0);
 void mellonW(int *mellon_t, int *mellon_w, int *mellon_m, int *maxW, int n, int m);
@@ -23,7 +43,11 @@ void quickSortNOR(int *a, int left, int right);
 void heapSort(int *a, int n);
 void countSort(int *a, int n);
 void bucketSort(int *a, int n, int bucketCount);
-int findPeakElement(vector<int>&nums);
+//int findPeakElement(vector<int>&nums);
+vector<int> findNumInString(string str, vector<int> numArr, int startIndex, int endIndex);
+//判断距离
+void distanceJudging(vector<int> A, vector<int>B, vector<int> R);
+
 
 int main()
 {
@@ -91,7 +115,7 @@ int main()
 	//cout << leny << lenq << endl;
 	//vector<vector<int>> arryZ;
 	//arryZ.size();
-	int n;
+/*	int n;
 	string Name[13] = { "A","B","C","D","E","F","J","H","I","J","K","L","M" };
 	cout << Name[0] << endl;
 	int numExam[13];
@@ -115,6 +139,44 @@ int main()
 		}
 	}
 	cout << Name[k];
+
+	string str;
+	cin >> str;
+	vector<int> A, B, R;
+	int i, j = 0;
+	int As[4];
+	for (i = 0; i < str.length(); i++) {
+
+		if (str[i] == '}' || str[i] == '{') {
+			As[j] = i; j++;
+		}
+	}
+	A = findNumInString(str, A, As[0], As[1]);
+	B = findNumInString(str, B, As[2], As[3]);
+	R = findNumInString(str, R, As[3], str.length());
+	distanceJudging(A, B, R);
+
+	vector<char> vec;
+	char tmpCh;
+	char t;
+	cout << "输入一串括号为：";
+	//while (cin.getline()) {
+	//	cin >> tmpCh;
+	//	vec.push_back(tmpCh);
+	//}	
+	while ((t = cin.get()) != '\n') {
+		cin >> tmpCh;
+		vec.push_back(tmpCh);
+	}
+
+	//调用isRight函数
+	bool myRes = isRight(vec);
+	cout << myRes << endl;
+	system("pause");
+*/	
+	
+
+	return 0;
 }
 /*
 int findPeakElement(vector<int>&nums) {
